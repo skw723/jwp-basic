@@ -30,7 +30,7 @@
                         <td>${user.email}</td>
                         <td>
                             <c:if test="${sessionScope.user.userId eq user.userId}">
-                            <a href="/user/updateForm?user=${user.userId}" class="btn btn-success" role="button">수정</a>
+                            <a href="/users/updateForm?user=${user.userId}" class="btn btn-success" role="button">수정</a>
                             </c:if>
                         </td>
                     </tr>
