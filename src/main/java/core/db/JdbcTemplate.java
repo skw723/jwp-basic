@@ -35,7 +35,7 @@ public class JdbcTemplate {
     }
 
     public <T> List<T> query(String sql, RowMapper<T> mapper, Object... parameters) {
-        return query(sql, mapper, createPreparedStatementSetter(parameters));
+        return query(sql, createPreparedStatementSetter(parameters), mapper);
     }
 
     public <T> T queryForObject(String sql, PreparedStatementSetter setter, RowMapper<T> mapper) {
@@ -48,7 +48,7 @@ public class JdbcTemplate {
     }
 
     public <T> T queryForObject(String sql, RowMapper<T> mapper, Object... parameters) {
-        return queryForObject(sql, mapper, createPreparedStatementSetter(parameters));
+        return queryForObject(sql, createPreparedStatementSetter(parameters), mapper);
     }
 
     public void update(String sql, PreparedStatementSetter setter) {

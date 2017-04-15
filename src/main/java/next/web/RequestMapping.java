@@ -20,6 +20,7 @@ public class RequestMapping {
         mappings.put("/users/logout", new LogoutController());
         mappings.put("/users/updateForm", new UpdateFormUserController());
         mappings.put("/users/update", new UpdateUserController());
+        mappings.put("/qna/show", new QnaShowController());
     }
 
     public Controller getController(String path) {
