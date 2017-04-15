@@ -1,4 +1,4 @@
-package next.controller;
+package next.controller.user;
 
 import next.web.Controller;
 import next.web.UserSessionUtils;

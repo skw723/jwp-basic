@@ -1,4 +1,4 @@
-package next.controller;
+package next.controller.login;
 
 import next.dao.UserDao;
 import next.model.User;

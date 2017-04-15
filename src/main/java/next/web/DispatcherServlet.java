@@ -38,6 +38,9 @@ public class DispatcherServlet extends HttpServlet {
     }
 
     private void returnView(String viewName, HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        if (viewName == null) {
+            return;
+        }
         if (viewName.startsWith("redirect:")) {
             resp.sendRedirect(viewName.substring(9, viewName.length()));
         } else {

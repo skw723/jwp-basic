@@ -3,29 +3,34 @@ package next.model;
 import java.sql.Timestamp;
 import java.util.Date;
 
-public class Question {
-    private long questionId;
+public class Answer {
+    private long answerId;
     private String writer;
-    private String title;
     private String contents;
     private Date createdDate;
-    private int countOfAnswer;
+    private long questionId;
 
-    public Question(long questionId, String writer, String title, String contents, Date createdDate, int countOfAnswer) {
-        this.questionId = questionId;
+    public Answer(long answerId, String writer, String contents, Date createdDate, long questionId) {
+        this.answerId = answerId;
         this.writer = writer;
-        this.title = title;
         this.contents = contents;
         this.createdDate = createdDate;
-        this.countOfAnswer = countOfAnswer;
-    }
-
-    public long getQuestionId() {
-        return questionId;
-    }
-
-    public void setQuestionId(long questionId) {
         this.questionId = questionId;
+    }
+
+    public Answer(String writer, String contents, Date createdDate, long questionId) {
+        this.writer = writer;
+        this.contents = contents;
+        this.createdDate = createdDate;
+        this.questionId = questionId;
+    }
+
+    public long getAnswerId() {
+        return answerId;
+    }
+
+    public void setAnswerId(long answerId) {
+        this.answerId = answerId;
     }
 
     public String getWriter() {
@@ -34,14 +39,6 @@ public class Question {
 
     public void setWriter(String writer) {
         this.writer = writer;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getContents() {
@@ -60,11 +57,11 @@ public class Question {
         this.createdDate = createdDate;
     }
 
-    public int getCountOfAnswer() {
-        return countOfAnswer;
+    public long getQuestionId() {
+        return questionId;
     }
 
-    public void setCountOfAnswer(int countOfAnswer) {
-        this.countOfAnswer = countOfAnswer;
+    public void setQuestionId(long questionId) {
+        this.questionId = questionId;
     }
 }

@@ -16,4 +16,8 @@ public class QuestionDao {
         RowMapper<Question> mapper = rs -> new Question(rs.getLong("questionId"), rs.getString("writer"), rs.getString("title"), rs.getString("contents"), rs.getDate("createdDate"), rs.getInt("countOfAnswer"));
         return new JdbcTemplate().queryForObject("SELECT questionId, writer, title, contents, createdDate, countOfAnswer FROM QUESTIONS WHERE questionId=?", mapper, questionId);
     }
+
+    public void updateAnswerCount(long questionId) {
+        new JdbcTemplate().update("UPDATE QUESTIONS SET countOfAnswer=countOfAnswer+1 WHERE questionId=?", questionId);
+    }
 }

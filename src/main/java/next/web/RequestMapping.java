@@ -1,6 +1,11 @@
 package next.web;
 
 import next.controller.*;
+import next.controller.login.LoginController;
+import next.controller.login.LogoutController;
+import next.controller.qna.AddAnswerController;
+import next.controller.qna.QnaShowController;
+import next.controller.user.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,6 +26,7 @@ public class RequestMapping {
         mappings.put("/users/updateForm", new UpdateFormUserController());
         mappings.put("/users/update", new UpdateUserController());
         mappings.put("/qna/show", new QnaShowController());
+        mappings.put("/api/qna/addAnswer", new AddAnswerController());
     }
 
     public Controller getController(String path) {
