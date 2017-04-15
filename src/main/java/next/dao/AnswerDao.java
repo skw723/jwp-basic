@@ -16,4 +16,8 @@ public class AnswerDao {
     public void insert(Answer answer) {
         new JdbcTemplate().update("INSERT INTO ANSWERS(writer, contents, createdDate, questionId) VALUES(?,?,?,?)", answer.getWriter(), answer.getContents(), answer.getCreatedDate(), answer.getQuestionId());
     }
+
+    public void delete(String answerId) {
+        new JdbcTemplate().update("DELETE FROM ANSWERS WHERE answerId=?", answerId);
+    }
 }

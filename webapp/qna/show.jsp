@@ -81,7 +81,8 @@
                                         <li>
                                             <form class="form-delete" action="/questions/${qna.questionId}/answers/${one.answerId}"
                                                   method="POST">
-                                                <input type="hidden" name="_method" value="DELETE">
+                                                <input type="hidden" name="questionId"  value="${qna.questionId}">
+                                                <input type="hidden" name="answerId"  value="${one.answerId}">
                                                 <button type="submit" class="link-delete-article">삭제</button>
                                             </form>
                                         </li>
@@ -132,7 +133,8 @@
                 <li>
                     <form class="form-delete" action="/questions/{4}/answers/{0}"
                           method="POST">
-                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="questionId"  value="{4}">
+                        <input type="hidden" name="answerId" value="{0}">
                         <button type="submit" class="link-delete-article">삭제</button>
                     </form>
                 </li>

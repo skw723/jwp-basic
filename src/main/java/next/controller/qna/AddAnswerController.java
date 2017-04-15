@@ -9,7 +9,6 @@ import next.web.Controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
-import java.sql.Timestamp;
 import java.util.Date;
 
 public class AddAnswerController implements Controller {
@@ -19,7 +18,7 @@ public class AddAnswerController implements Controller {
         AnswerDao answerDao = new AnswerDao();
         answerDao.insert(answer);
         QuestionDao questionDao = new QuestionDao();
-        questionDao.updateAnswerCount(answer.getQuestionId());
+        questionDao.updateAnswerCountIncrease(answer.getQuestionId());
 
         ObjectMapper mapper = new ObjectMapper();
         response.setContentType("application/json;charset=utf-8");

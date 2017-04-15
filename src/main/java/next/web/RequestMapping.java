@@ -4,6 +4,7 @@ import next.controller.*;
 import next.controller.login.LoginController;
 import next.controller.login.LogoutController;
 import next.controller.qna.AddAnswerController;
+import next.controller.qna.DeleteAnswerController;
 import next.controller.qna.QnaShowController;
 import next.controller.user.*;
 
@@ -27,6 +28,7 @@ public class RequestMapping {
         mappings.put("/users/update", new UpdateUserController());
         mappings.put("/qna/show", new QnaShowController());
         mappings.put("/api/qna/addAnswer", new AddAnswerController());
+        mappings.put("/api/qna/deleteAnswer", new DeleteAnswerController());
     }
 
     public Controller getController(String path) {

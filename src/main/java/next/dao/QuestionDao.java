@@ -17,7 +17,11 @@ public class QuestionDao {
         return new JdbcTemplate().queryForObject("SELECT questionId, writer, title, contents, createdDate, countOfAnswer FROM QUESTIONS WHERE questionId=?", mapper, questionId);
     }
 
-    public void updateAnswerCount(long questionId) {
+    public void updateAnswerCountIncrease(long questionId) {
         new JdbcTemplate().update("UPDATE QUESTIONS SET countOfAnswer=countOfAnswer+1 WHERE questionId=?", questionId);
+    }
+
+    public void updateAnswerCountDecrease(long questionId) {
+        new JdbcTemplate().update("UPDATE QUESTIONS SET countOfAnswer=countOfAnswer-1 WHERE questionId=?", questionId);
     }
 }

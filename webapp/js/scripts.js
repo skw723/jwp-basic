@@ -11,7 +11,6 @@ $(document).ready(function () {/* jQuery toggle layout */
     });
 
     $(".submit-write button.btn-success").click(addAnswer);
-
     function addAnswer(e) {
         e.preventDefault();
 
@@ -22,12 +21,12 @@ $(document).ready(function () {/* jQuery toggle layout */
             url: "/api/qna/addAnswer",
             data: queryString,
             dataType: "json",
-            error: onError,
-            success: onSuccess
+            error: onAddError,
+            success: onAddSuccess
         });
     }
 
-    function onSuccess(data) {
+    function onAddSuccess(data) {
         var answerTemplate = $("#answerTemplate").html();
         var template = answerTemplate.format(data.answerId, data.writer, data.contents, new Date(data.createdDate), data.questionId);
         $(template).insertBefore(".qna-comment-slipp-articles .submit-write");
@@ -37,7 +36,7 @@ $(document).ready(function () {/* jQuery toggle layout */
         $("#contents").val("");
     }
 
-    function onError(data) {
+    function onAddError(data) {
         alert("등록실패");
     }
 
@@ -46,5 +45,31 @@ $(document).ready(function () {/* jQuery toggle layout */
         return this.replace(/{(\d+)}/g, function(match, number) {
             return typeof args[number] != 'undefined' ? args[number] : match;
         });
+    }
+
+    $(".qna-comment-slipp-articles").on("click", ".form-delete button[type=submit]", deleteAnswer);
+    function deleteAnswer(e) {
+        e.preventDefault();
+        var queryString = $(e.currentTarget).parent(".form-delete").serialize();
+        var target = e.currentTarget;
+
+        $.ajax({
+            type: "post",
+            url: "/api/qna/deleteAnswer",
+            data: queryString,
+            dataType: "json",
+            error: onDeleteError,
+            success: onDeleteSuccess(target)
+        });
+    }
+
+    function onDeleteSuccess(target) {
+        $(target).parents("article").remove();
+        var newCount = $(".qna-comment-slipp-articles article").length | 0;
+        $("#countOfAnswer").html(newCount);
+    }
+
+    function onDeleteError(data) {
+        alert(data.message);
     }
 });
