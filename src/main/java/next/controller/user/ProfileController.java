@@ -1,18 +1,20 @@
 package next.controller.user;
 
 import next.web.Controller;
+import next.web.JspView;
+import next.web.ModelAndView;
 import next.web.UserSessionUtils;
 
-import javax.naming.AuthenticationException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class ProfileController implements Controller {
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public ModelAndView execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mav = new ModelAndView();
         if (UserSessionUtils.isLogined(request.getSession())) {
-            return "/user/profile.jsp";
+            return mav.setView(new JspView("/user/profile.jsp"));
         }
-        return "redirect:/users/loginForm";
+        return mav.setView(new JspView("redirect:/users/loginForm"));
     }
 }

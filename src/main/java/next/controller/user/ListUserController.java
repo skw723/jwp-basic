@@ -2,6 +2,8 @@ package next.controller.user;
 
 import next.dao.UserDao;
 import next.web.Controller;
+import next.web.JspView;
+import next.web.ModelAndView;
 import next.web.UserSessionUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,11 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 
 public class ListUserController implements Controller {
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public ModelAndView execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mav = new ModelAndView();
         if (UserSessionUtils.isLogined(request.getSession()) == false) {
-            return "redirect:/users/loginForm";
+            return mav.setView(new JspView("redirect:/users/loginForm"));
         }
-        request.setAttribute("users", new UserDao().findAll());
-        return "/user/list.jsp";
+        return mav.setView(new JspView("/user/list.jsp")).addObject("users", new UserDao().findAll());
     }
 }

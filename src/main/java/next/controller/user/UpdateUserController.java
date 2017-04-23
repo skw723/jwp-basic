@@ -3,6 +3,8 @@ package next.controller.user;
 import next.dao.UserDao;
 import next.model.User;
 import next.web.Controller;
+import next.web.JspView;
+import next.web.ModelAndView;
 import next.web.UserSessionUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class UpdateUserController implements Controller {
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public ModelAndView execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         if (UserSessionUtils.isLogined(request.getSession())) {
             UserDao userDao = new UserDao();
             String userId = request.getParameter("userId");
@@ -22,6 +24,6 @@ public class UpdateUserController implements Controller {
             userDao.update(user);
         }
 
-        return "redirect:/home";
+        return new ModelAndView(new JspView("redirect:/home"));
     }
 }

@@ -1,23 +1,19 @@
 package next.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Result {
-    private boolean isSuccess;
-    private String message;
-
-    public String getMessage() {
-        return message;
+    public static Map<String, Object> ok() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("isSuccess", true);
+        return map;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public boolean isSuccess() {
-
-        return isSuccess;
-    }
-
-    public void setSuccess(boolean success) {
-        isSuccess = success;
+    public static Map<String, Object> fail(String message) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("isSuccess", false);
+        map.put("message", message);
+        return map;
     }
 }

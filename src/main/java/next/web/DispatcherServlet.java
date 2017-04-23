@@ -2,12 +2,8 @@ package next.web;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.mock.web.MockRequestDispatcher;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -26,25 +22,14 @@ public class DispatcherServlet extends HttpServlet {
 
         if (controller != null) {
             try {
-                String viewName = controller.execute(req, resp);
-                returnView(viewName, req, resp);
+                ModelAndView mav = controller.execute(req, resp);
+                mav.getView().render(mav.getModel(), req, resp);
             } catch (Exception e) {
                 logger.error(e.getMessage(), e);
                 throw new ServletException(e);
             }
         } else {
             resp.sendError(HttpServletResponse.SC_NOT_FOUND);
-        }
-    }
-
-    private void returnView(String viewName, HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        if (viewName == null) {
-            return;
-        }
-        if (viewName.startsWith("redirect:")) {
-            resp.sendRedirect(viewName.substring(9, viewName.length()));
-        } else {
-            req.getRequestDispatcher(viewName).forward(req, resp);
         }
     }
 }

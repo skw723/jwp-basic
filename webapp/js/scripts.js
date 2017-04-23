@@ -28,7 +28,7 @@ $(document).ready(function () {/* jQuery toggle layout */
 
     function onAddSuccess(data) {
         var answerTemplate = $("#answerTemplate").html();
-        var template = answerTemplate.format(data.answerId, data.writer, data.contents, new Date(data.createdDate), data.questionId);
+        var template = answerTemplate.format(data.answer.answerId, data.answer.writer, data.answer.contents, new Date(data.answer.createdDate), data.answer.questionId);
         $(template).insertBefore(".qna-comment-slipp-articles .submit-write");
         var newCount = $(".qna-comment-slipp-articles article").length | 0;
         $("#countOfAnswer").html(newCount);
@@ -51,6 +51,7 @@ $(document).ready(function () {/* jQuery toggle layout */
     function deleteAnswer(e) {
         e.preventDefault();
         var queryString = $(e.currentTarget).parent(".form-delete").serialize();
+
         var target = e.currentTarget;
 
         $.ajax({
@@ -59,17 +60,21 @@ $(document).ready(function () {/* jQuery toggle layout */
             data: queryString,
             dataType: "json",
             error: onDeleteError,
-            success: onDeleteSuccess(target)
+            success: onDeleteSuccess.bind(target)
         });
     }
 
-    function onDeleteSuccess(target) {
-        $(target).parents("article").remove();
-        var newCount = $(".qna-comment-slipp-articles article").length | 0;
-        $("#countOfAnswer").html(newCount);
+    function onDeleteSuccess(data) {
+        if (data.result.isSuccess) {
+            $(this).parents("article").remove();
+            var newCount = $(".qna-comment-slipp-articles article").length | 0;
+            $("#countOfAnswer").html(newCount);
+        } else {
+            alert(data.result.message);
+        }
     }
 
     function onDeleteError(data) {
-        alert(data.message);
+        alert(data.result.message);
     }
 });
